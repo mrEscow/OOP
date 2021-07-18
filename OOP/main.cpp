@@ -79,7 +79,7 @@ bool Stack::push(int value) {
 
 void Stack::pop() {
 	if (m_length == -1) {
-		std::cout << "Stack is empty" << std::endl;
+		std::cout << "STACK IS EMPTY" << std::endl;
 	}
 	else {
 		m_array[m_length] = 0;
