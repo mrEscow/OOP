@@ -63,13 +63,64 @@ void PrintStydent(const Student& student) {
 
 
 
+class Fruit {
+
+	std::string m_name;
+	std::string m_color;
+
+public:
+
+	Fruit(std::string name, std::string color) {
+		m_name = name;
+		m_color = color;
+	}
+
+	std::string getName(){
+		return m_name;
+	}
+
+	std::string getColor() {
+		return m_color;
+	}
+};
+
+class Apple : public Fruit{
+public:
+	Apple(std::string color, std::string name = "apple") : Fruit(name, color){
+		
+	}
+};
+
+class Banana : public Fruit {
+public:
+	Banana() :Fruit("banana", "yellow") {
+
+	}
+};
+
+class GrannySmith : public Apple  {
+public:
+	GrannySmith() :Apple("green", "Granny Smith") {};
+};
+
 
 
 int main() {
-	
+	std::cout << "-------------------" << std::endl;
 	Student ivan("Ivan","man",18,70,2);
 	Student vasia("Vasia", "man", 20, 80, 4);
 	Student petia("Ivan", "man", 23, 65, 6);
 	PrintStydent(vasia);
+
+	std::cout << "-------------------" << std::endl;
+	Apple a("red");	
+	Banana b;
+	GrannySmith c;
+
+	std::cout << "My " << a.getName() << " is " << a.getColor() << ".\n";
+	std::cout << "My " << b.getName() << " is " << b.getColor() << ".\n";
+	std::cout << "My " << c.getName() << " is " << c.getColor() << ".\n";
+
+	std::cout << "-------------------" << std::endl;
 	return 0;
 }
