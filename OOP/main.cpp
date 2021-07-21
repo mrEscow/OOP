@@ -8,6 +8,8 @@
 //Для всех классов создать конструкторы.Для класса Figure добавить чисто виртуальную функцию area() (площадь).
 //Во всех остальных классах переопределить эту функцию, исходя из геометрических формул нахождения площади.
 
+const float PI = 3.141592653589;
+
 class Figure {
 protected:
 	Figure();
@@ -28,9 +30,14 @@ public:
 };
 
 class Circle : protected Figure {
-	Circle();
-	float area() override {
+private:
+	float m_diameter{ 0 };
+public:
 
+	Circle(float diameter): m_diameter(diameter){}
+
+	float area() override {
+		return PI * ((m_diameter * m_diameter) / 4);
 	}
 };
 
