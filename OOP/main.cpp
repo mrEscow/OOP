@@ -9,41 +9,48 @@
 //¬о всех остальных классах переопределить эту функцию, исход€ из геометрических формул нахождени€ площади.
 
 class Figure {
+protected:
 	Figure();
-	virtual void area()=0;
+	virtual float area() = 0;
 };
 
-class Parallelogram : Figure {
-	Parallelogram();
-	void area() override {
+class Parallelogram : protected Figure {
+private:
+	float m_width{ 0 };
+	float m_height{ 0 }; 
+public:
 
+	Parallelogram(float width, float height) : m_width(width), m_height(height){}
+
+	float area() override {
+		return m_width * m_height;
 	}
 };
 
-class Circle : Figure {
+class Circle : protected Figure {
 	Circle();
-	void area() override {
+	float area() override {
 
 	}
 };
 
-class Rectangle : Parallelogram {
+class Rectangle : protected Parallelogram {
 	Rectangle();
-	void area() override {
+	float area() override {
 
 	}
 };
 
-class Square : Parallelogram {
+class Square : protected Parallelogram {
 	Square();
-	void area() override {
+	float area() override {
 
 	}
 };
 
-class Rhombus : Parallelogram {
+class Rhombus : protected Parallelogram {
 	Rhombus();
-	void area() override {
+	float area() override {
 
 	}
 };
