@@ -1,14 +1,15 @@
 #include <iostream>
 #include <cmath>
+#include <string>
 
 
-
+//--------------------------------------------------------------------------------------------------------------------------------------
 //Создать абстрактный класс Figure(фигура).
 //Его наследниками являются классы Parallelogram(параллелограмм) и Circle(круг).
 //Класс Parallelogram — базовый для классов Rectangle(прямоугольник), Square(квадрат), Rhombus(ромб).
 //Для всех классов создать конструкторы.Для класса Figure добавить чисто виртуальную функцию area() (площадь).
 //Во всех остальных классах переопределить эту функцию, исходя из геометрических формул нахождения площади.
-
+//--------------------------------------------------------------------------------------------------------------------------------------
 const float PI = 3.141592653589;
 
 class Figure {
@@ -77,25 +78,101 @@ public:
 		return (m_side * m_side) * sin(m_angle);
 	}
 };
+
+//--------------------------------------------------------------------------------------------------------------------------------------
+//Создать класс Car(автомобиль) с полями company(компания) и model(модель).
+//Классы - наследники: PassengerCar(легковой автомобиль) и Bus(автобус).
+//От этих классов наследует класс Minivan(минивэн).
+//Создать конструкторы для каждого из классов, чтобы они выводили данные о классах.
+//Создать объекты для каждого из классов и посмотреть, в какой последовательности выполняются конструкторы.Обратить внимание на проблему «алмаз смерти».
+//Примечание : если использовать виртуальный базовый класс, то объект самого "верхнего" базового класса создает самый "дочерний" класс.
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+class Car {
+private:
+
+std::string m_company;
+std::string m_model;
+
+public:
+	Car(std::string company, std::string model) : m_company(company), m_model(model) {
+		std::cout << "constructor Car" << std::endl;
+		std::cout << "Company:\t" << m_company << std::endl;
+		std::cout << "Model:  \t" << m_model << std::endl;
+	
+	}
+	~Car() {
+		std::cout << "destructor Car" << std::endl;
+	}
+	std::string GetCompany() { return m_company; }
+	std::string GetModel() { return m_model; }
+};
+
+class PassengerCar : virtual public Car{
+public:
+	PassengerCar(std::string company, std::string model) : Car(company,model) {
+		std::cout << "constructor PassengerCar" << std::endl;
+		std::cout << "Company:\t" << GetCompany() << std::endl;
+		std::cout << "Model:  \t" << GetModel() << std::endl;
+	}
+	~PassengerCar() {
+		std::cout << "destructor PassengerCar" << std::endl;
+	}
+};
+
+class Bus : virtual public Car{
+public:
+	Bus(std::string company, std::string model) : Car(company, model) {
+		std::cout << "constructor Bus" << std::endl;
+		std::cout << "Company:\t" << GetCompany() << std::endl;
+		std::cout << "Model:  \t" << GetModel() << std::endl;
+	}
+	~Bus() {
+		std::cout << "destructor Bus" << std::endl;
+	}
+};
+
+class Minivan : public PassengerCar, public Bus{
+public:
+	Minivan(std::string company, std::string model) : PassengerCar(company, model), Bus(company, model), Car(company, model) {
+		std::cout << "constructor Minivan" << std::endl;
+		std::cout << "Company:\t" << GetCompany() << std::endl;
+		std::cout << "Model:  \t" << GetModel() << std::endl;
+	}
+	~Minivan() {
+		std::cout << "destructor Minivan" << std::endl;
+	}
+};
+
 int main() {
+	//----------------------------------------------------
+	//Parallelogram parallelogram(15, 10);
+	//Circle circle(20);
+	//Rectangle rectangle(8, 20);
+	//Square square(17);
+	//Rhombus rhombus(5, 45);
 
-	Parallelogram parallelogram(15, 10);
-	Circle circle(20);
-	Rectangle rectangle(8, 20);
-	Square square(17);
-	Rhombus rhombus(5, 45);
+	//Figure* figure;
 
-	Figure* figure;
-
-	figure = &parallelogram;
-	std::cout << figure->area() << std::endl;
-	figure = &circle;
-	std::cout << figure->area() << std::endl;
-	figure = &rectangle;
-	std::cout << figure->area() << std::endl;
-	figure = &square;
-	std::cout << figure->area() << std::endl;
-	figure = &rhombus;
-	std::cout << figure->area() << std::endl;
+	//figure = &parallelogram;
+	//std::cout << figure->area() << std::endl;
+	//figure = &circle;
+	//std::cout << figure->area() << std::endl;
+	//figure = &rectangle;
+	//std::cout << figure->area() << std::endl;
+	//figure = &square;
+	//std::cout << figure->area() << std::endl;
+	//figure = &rhombus;
+	//std::cout << figure->area() << std::endl;
+	//----------------------------------------------------
+	std::cout << "-------------------------" << std::endl;
+	Car car{ "Null", "Null" };
+	std::cout << "-------------------------" << std::endl;
+	PassengerCar passengerCar{ "Lada","Sedan" };
+	std::cout << "-------------------------" << std::endl;
+	Bus bus{ "Benc","Bus" };
+	std::cout << "-------------------------" << std::endl;
+	Minivan minivan{ "Fiat","Multipra" };
+	std::cout << "-------------------------" << std::endl;
 	return 0;
 }
