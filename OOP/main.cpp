@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <string>
+#include <cassert>
 
 
 //--------------------------------------------------------------------------------------------------------------------------------------
@@ -158,17 +159,27 @@ private:
 	float m_numerator{ 0 };
 	float m_denominator{ 1 };
 public:
-	Fraction(float numerator, float denominator) {
+	Fraction() // конструктор по умолчанию
+	{
+		m_numerator = 0;
+		m_denominator = 1;
+	}
+	Fraction(float numerator, float denominator = 1) // конструктор с параметрами
+	{
 		m_numerator = numerator;
+		//assert(denominator != 0); // Обработчик ошибок
 		if (denominator == 0) {
 			std::cout << "ERROR: it is forbidden to divide by zero!" << std::endl;
-
+			std::cout << "ERROR: The default divisor(1) is used!" << std::endl;
+			m_denominator = 1;
 		}
 		else {
 			m_denominator = denominator;
 		}
 	}
-
+	void PrintFraction() {
+		std::cout << "Fraction:\t" << m_numerator << "/" << m_denominator << std::endl;
+	}
 };
 
 int main() {
@@ -203,6 +214,8 @@ int main() {
 	//std::cout << "-------------------------" << std::endl;
 	//----------------------------------------------------
 	Fraction fraction(10, 0);
-
+	fraction.PrintFraction();
+	Fraction fraction1(3, 5);
+	fraction1.PrintFraction();
 	return 0;
 }
