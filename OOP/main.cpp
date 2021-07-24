@@ -177,9 +177,11 @@ public:
 			m_denominator = denominator;
 		}
 	}
+	//----------------------------------------------------
 	void PrintFraction() {
 		std::cout << "Fraction:\t" << m_numerator << "/" << m_denominator << std::endl;
 	}
+	//----------------------------------------------------
 	Fraction operator+(const Fraction& second) {
 		Fraction temp;
 		temp.m_numerator = (this->m_numerator * second.m_denominator) + (second.m_numerator * this->m_denominator);
@@ -197,6 +199,24 @@ public:
 		temp.m_numerator = this->m_numerator * second.m_numerator;
 		temp.m_denominator = this->m_denominator * second.m_denominator;
 		return Fraction(temp.m_numerator, temp.m_denominator);
+	}
+	Fraction operator/(const Fraction& second) {
+		Fraction temp;
+		temp.m_numerator = this->m_numerator * second.m_denominator;
+		temp.m_denominator = this->m_denominator * second.m_numerator;
+		return Fraction(temp.m_numerator, temp.m_denominator);
+	}
+	//----------------------------------------------------
+	Fraction operator-() {
+		Fraction temp;
+		temp.m_numerator = this->m_numerator * -1;
+		temp.m_denominator = this->m_denominator;
+		return Fraction(temp.m_numerator, temp.m_denominator);
+	}
+	//----------------------------------------------------
+	bool operator==(const Fraction& second) {
+		//if()
+		return true;
 	}
 };
 
@@ -249,6 +269,12 @@ int main() {
 	fraction3.PrintFraction();
 	std::cout << "-------------------------" << std::endl;
 	std::cout << "Division:" << std::endl;
+	fraction3 = fraction1 / fraction2;
+	fraction3.PrintFraction();
+	std::cout << "-------------------------" << std::endl;
+	std::cout << "Minus:" << std::endl;
+	fraction3 = -fraction3;
+	fraction3.PrintFraction();
 	//----------------------------------------------------
 
 	return 0;
