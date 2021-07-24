@@ -158,6 +158,14 @@ class Fraction {
 private:
 	int m_numerator{ 0 };
 	int m_denominator{ 1 };
+
+	static int NOD(int first, int second){
+		while (first != 0 && second != 0){
+			if (first > second) first %= second;
+			else second %= first;
+		}
+		return first + second;
+	}
 public:
 	Fraction() // конструктор по умолчанию
 	{
@@ -179,31 +187,46 @@ public:
 	}
 	//----------------------------------------------------
 	void PrintFraction() {
-		std::cout << "Fraction:\t" << m_numerator << "/" << m_denominator << std::endl;
+		if(this->m_numerator == 0)
+			std::cout << "Fraction:\t" << m_numerator << std::endl;
+		else if(this->m_numerator == this->m_denominator || -this->m_numerator == this->m_denominator)
+			std::cout << "Fraction:\t" << m_numerator << std::endl;
+		else
+			std::cout << "Fraction:\t" << m_numerator << "/" << m_denominator << std::endl;
+	}
+	//----------------------------------------------------
+	void Reduction() {
+		int nod = NOD(this->m_numerator, this->m_denominator);
+		this->m_numerator = this->m_numerator / nod;
+		this->m_denominator = this->m_denominator / nod;
 	}
 	//----------------------------------------------------
 	Fraction operator+(const Fraction& second) {
 		Fraction temp;
 		temp.m_numerator = (this->m_numerator * second.m_denominator) + (second.m_numerator * this->m_denominator);
 		temp.m_denominator = this->m_denominator * second.m_denominator;
+		temp.Reduction();
 		return Fraction(temp.m_numerator,temp.m_denominator);
 	}
 	Fraction operator-(const Fraction& second) {
 		Fraction temp;
 		temp.m_numerator = (this->m_numerator * second.m_denominator) - (second.m_numerator * this->m_denominator);
 		temp.m_denominator = this->m_denominator * second.m_denominator;
+		temp.Reduction();
 		return Fraction(temp.m_numerator, temp.m_denominator);
 	}
 	Fraction operator*(const Fraction& second) {
 		Fraction temp;
 		temp.m_numerator = this->m_numerator * second.m_numerator;
 		temp.m_denominator = this->m_denominator * second.m_denominator;
+		temp.Reduction();
 		return Fraction(temp.m_numerator, temp.m_denominator);
 	}
 	Fraction operator/(const Fraction& second) {
 		Fraction temp;
 		temp.m_numerator = this->m_numerator * second.m_denominator;
 		temp.m_denominator = this->m_denominator * second.m_numerator;
+		temp.Reduction();
 		return Fraction(temp.m_numerator, temp.m_denominator);
 	}
 	//----------------------------------------------------
@@ -214,9 +237,21 @@ public:
 		return Fraction(temp.m_numerator, temp.m_denominator);
 	}
 	//----------------------------------------------------
-	bool operator==(const Fraction& second) {
-		//if()
-		return true;
+	friend bool operator==(const Fraction& first, const Fraction& second) {
+		
+		if (first.m_numerator / NOD(first.m_numerator, first.m_denominator) == second.m_numerator / NOD(second.m_numerator, second.m_denominator) &&
+			first.m_denominator / NOD(first.m_numerator, first.m_denominator) == second.m_denominator / NOD(second.m_numerator, second.m_denominator))
+			return true;
+		else
+			return false;
+	}
+	friend bool operator!=(const Fraction& first, const Fraction& second) {
+
+		if (first.m_numerator / NOD(first.m_numerator, first.m_denominator) != second.m_numerator / NOD(second.m_numerator, second.m_denominator) ||
+			first.m_denominator / NOD(first.m_numerator, first.m_denominator) != second.m_denominator / NOD(second.m_numerator, second.m_denominator))
+			return true;
+		else
+			return false;
 	}
 };
 
@@ -251,9 +286,10 @@ int main() {
 	//Minivan minivan{ "Fiat","Multipra" };
 	//std::cout << "-------------------------" << std::endl;
 	//----------------------------------------------------
-	Fraction fraction1(1, 3);
+	std::cout << "-------------------------" << std::endl;
+	Fraction fraction1(1, 5);
 	fraction1.PrintFraction();
-	Fraction fraction2(2, 5);
+	Fraction fraction2(2, 10);
 	fraction2.PrintFraction();
 	std::cout << "-------------------------" << std::endl;
 	std::cout << "Addition:" << std::endl;
@@ -275,6 +311,19 @@ int main() {
 	std::cout << "Minus:" << std::endl;
 	fraction3 = -fraction3;
 	fraction3.PrintFraction();
+	std::cout << "-------------------------" << std::endl;
+	std::cout << "==" << std::endl;
+	if (fraction1 == fraction2)
+		std::cout << "true" << std::endl;
+	else
+		std::cout << "false" << std::endl;
+	std::cout << "-------------------------" << std::endl;
+	std::cout << "!=" << std::endl;
+	if (fraction1 != fraction2)
+		std::cout << "true" << std::endl;
+	else
+		std::cout << "false" << std::endl;
+	std::cout << "-------------------------" << std::endl;
 	//----------------------------------------------------
 
 	return 0;
