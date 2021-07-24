@@ -156,15 +156,15 @@ public:
 
 class Fraction {
 private:
-	float m_numerator{ 0 };
-	float m_denominator{ 1 };
+	int m_numerator{ 0 };
+	int m_denominator{ 1 };
 public:
 	Fraction() // конструктор по умолчанию
 	{
 		m_numerator = 0;
 		m_denominator = 1;
 	}
-	Fraction(float numerator, float denominator = 1) // конструктор с параметрами
+	Fraction(int numerator, int denominator = 1) // конструктор с параметрами
 	{
 		m_numerator = numerator;
 		//assert(denominator != 0); // Обработчик ошибок
@@ -179,6 +179,24 @@ public:
 	}
 	void PrintFraction() {
 		std::cout << "Fraction:\t" << m_numerator << "/" << m_denominator << std::endl;
+	}
+	Fraction operator+(const Fraction& second) {
+		Fraction temp;
+		temp.m_numerator = (this->m_numerator * second.m_denominator) + (second.m_numerator * this->m_denominator);
+		temp.m_denominator = this->m_denominator * second.m_denominator;
+		return Fraction(temp.m_numerator,temp.m_denominator);
+	}
+	Fraction operator-(const Fraction& second) {
+		Fraction temp;
+		temp.m_numerator = (this->m_numerator * second.m_denominator) - (second.m_numerator * this->m_denominator);
+		temp.m_denominator = this->m_denominator * second.m_denominator;
+		return Fraction(temp.m_numerator, temp.m_denominator);
+	}
+	Fraction operator*(const Fraction& second) {
+		Fraction temp;
+		temp.m_numerator = this->m_numerator * second.m_numerator;
+		temp.m_denominator = this->m_denominator * second.m_denominator;
+		return Fraction(temp.m_numerator, temp.m_denominator);
 	}
 };
 
@@ -213,9 +231,25 @@ int main() {
 	//Minivan minivan{ "Fiat","Multipra" };
 	//std::cout << "-------------------------" << std::endl;
 	//----------------------------------------------------
-	Fraction fraction(10, 0);
-	fraction.PrintFraction();
-	Fraction fraction1(3, 5);
+	Fraction fraction1(1, 3);
 	fraction1.PrintFraction();
+	Fraction fraction2(2, 5);
+	fraction2.PrintFraction();
+	std::cout << "-------------------------" << std::endl;
+	std::cout << "Addition:" << std::endl;
+	Fraction fraction3 = fraction1 + fraction2;
+	fraction3.PrintFraction();
+	std::cout << "-------------------------" << std::endl;
+	std::cout << "Subtraction:" << std::endl;
+	fraction3 = fraction1 - fraction2;
+	fraction3.PrintFraction();
+	std::cout << "-------------------------" << std::endl;
+	std::cout << "Multiplication:" << std::endl;
+	fraction3 = fraction1 * fraction2;
+	fraction3.PrintFraction();
+	std::cout << "-------------------------" << std::endl;
+	std::cout << "Division:" << std::endl;
+	//----------------------------------------------------
+
 	return 0;
 }
