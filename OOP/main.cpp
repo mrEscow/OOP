@@ -253,6 +253,34 @@ public:
 		else
 			return false;
 	}
+	friend bool operator>(const Fraction& first, const Fraction& second) {
+	
+		if (first.m_numerator * second.m_denominator > first.m_denominator * second.m_numerator)
+			return true;
+		else
+			return false;
+	}
+	friend bool operator>=(const Fraction& first, const Fraction& second) {
+
+		if ((first.m_numerator * second.m_denominator) >= (first.m_denominator * second.m_numerator))
+			return true;
+		else
+			return false;
+	}
+	friend bool operator<(const Fraction& first, const Fraction& second) {
+
+		if (second > first)
+			return true;
+		else
+			return false;
+	}
+	friend bool operator<=(const Fraction& first, const Fraction& second) {
+
+		if (second >= first)
+			return true;
+		else
+			return false;
+	}
 };
 
 int main() {
@@ -320,6 +348,30 @@ int main() {
 	std::cout << "-------------------------" << std::endl;
 	std::cout << "!=" << std::endl;
 	if (fraction1 != fraction2)
+		std::cout << "true" << std::endl;
+	else
+		std::cout << "false" << std::endl;
+	std::cout << "-------------------------" << std::endl;
+	std::cout << ">" << std::endl;
+	if (fraction1 > fraction2)
+		std::cout << "true" << std::endl;
+	else
+		std::cout << "false" << std::endl;
+	std::cout << "-------------------------" << std::endl;
+	std::cout << ">=" << std::endl;
+	if (fraction1 >= fraction2)
+		std::cout << "true" << std::endl;
+	else
+		std::cout << "false" << std::endl;
+	std::cout << "-------------------------" << std::endl;
+	std::cout << "<" << std::endl;
+	if (fraction1 < fraction2)
+		std::cout << "true" << std::endl;
+	else
+		std::cout << "false" << std::endl;
+	std::cout << "-------------------------" << std::endl;
+	std::cout << "<=" << std::endl;
+	if (fraction1 <= fraction2)
 		std::cout << "true" << std::endl;
 	else
 		std::cout << "false" << std::endl;
