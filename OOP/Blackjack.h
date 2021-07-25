@@ -120,16 +120,17 @@ private:
 public:
 	GenericPlayer(string name): m_name(name){}
 
-	void IsHitting() {
+	virtual void IsHitting() = 0;
 
-	}
-
-	void IsBoosted() {
-
+	bool IsBoosted() {
+		if (GetTotal() > 21)
+			return true;
+		else
+			return false;
 	}
 
 	void Bust() {
-
+		cout << m_name << " has too many points!" << endl;
 	}
 };
 
