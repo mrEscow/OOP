@@ -75,8 +75,13 @@ public:
 
 	int GetTotal() {
 		int sum{ 0 };
-		for (auto card : m_Cards)
-			sum += card->GetValue();
+		for (auto card : m_Cards) {
+			if (sum <= 10 && card->GetValue() == 1)
+				sum += 11;
+			else
+				sum += card->GetValue();
+		}
+
 		return sum;
 	}
 };
