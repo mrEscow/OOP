@@ -15,7 +15,6 @@ const float PI = 3.141592653589;
 
 class Figure {
 public:
-	//Figure();
 	virtual float area() = 0;
 };
 
@@ -28,6 +27,7 @@ public:
 	Parallelogram(float width, float height) : m_width(width), m_height(height){}
 
 	float area() override {
+		std::cout << "Area Parallelogram: ";
 		return m_width * m_height;
 	}
 };
@@ -40,6 +40,7 @@ public:
 	Circle(float diameter): m_diameter(diameter){}
 
 	float area() override {
+		std::cout << "Area Circle:\t ";
 		return PI * ((m_diameter * m_diameter) / 4);
 	}
 };
@@ -54,6 +55,7 @@ public:
 		m_height = height;
 	}
 	float area() override {
+		std::cout << "Area Rectangle:\t ";
 		return m_width * m_height; 
 	}
 };
@@ -64,6 +66,7 @@ private:
 public:
 	Square(float side) : Parallelogram(side, side), m_side(side) {}
 	float area() override {
+		std::cout << "Area Square:\t ";
 		return m_side * m_side;
 	}
 };
@@ -75,7 +78,7 @@ private:
 public:
 	Rhombus(float side,float angle):Parallelogram(side,side),m_side(side),m_angle(angle){}
 	float area() override {
-		std::cout << sin(m_angle)<< std::endl;
+		std::cout << "Area Rhombus:\t ";
 		return (m_side * m_side) * sin(m_angle);
 	}
 };
@@ -331,97 +334,97 @@ public:
 
 int main() {
 	//----------------------------------------------------
-	//Parallelogram parallelogram(15, 10);
-	//Circle circle(20);
-	//Rectangle rectangle(8, 20);
-	//Square square(17);
-	//Rhombus rhombus(5, 45);
-
-	//Figure* figure;
-
-	//figure = &parallelogram;
-	//std::cout << figure->area() << std::endl;
-	//figure = &circle;
-	//std::cout << figure->area() << std::endl;
-	//figure = &rectangle;
-	//std::cout << figure->area() << std::endl;
-	//figure = &square;
-	//std::cout << figure->area() << std::endl;
-	//figure = &rhombus;
-	//std::cout << figure->area() << std::endl;
+	std::cout << "-------------------------" << std::endl;
+	Parallelogram parallelogram(15, 10);
+	Circle circle(20);
+	Rectangle rectangle(8, 20);
+	Square square(17);
+	Rhombus rhombus(5, 45);
+	Figure* figure;
+	figure = &parallelogram;
+	std::cout << figure->area() << std::endl;
+	figure = &circle;
+	std::cout << figure->area() << std::endl;
+	figure = &rectangle;
+	std::cout << figure->area() << std::endl;
+	figure = &square;
+	std::cout << figure->area() << std::endl;
+	figure = &rhombus;
+	std::cout << figure->area() << std::endl;
+	std::cout << "-------------------------" << std::endl;
 	//----------------------------------------------------
-	//std::cout << "-------------------------" << std::endl;
-	//Car car{ "Null", "Null" };
-	//std::cout << "-------------------------" << std::endl;
-	//PassengerCar passengerCar{ "Lada","Sedan" };
-	//std::cout << "-------------------------" << std::endl;
-	//Bus bus{ "Benc","Bus" };
-	//std::cout << "-------------------------" << std::endl;
-	//Minivan minivan{ "Fiat","Multipra" };
-	//std::cout << "-------------------------" << std::endl;
+	std::cout << "-------------------------" << std::endl;
+	Car car{ "Null", "Null" };
+	std::cout << "-------------------------" << std::endl;
+	PassengerCar passengerCar{ "Lada","Sedan" };
+	std::cout << "-------------------------" << std::endl;
+	Bus bus{ "Benc","Bus" };
+	std::cout << "-------------------------" << std::endl;
+	Minivan minivan{ "Fiat","Multipra" };
+	std::cout << "-------------------------" << std::endl;
 	//----------------------------------------------------
-	//std::cout << "-------------------------" << std::endl;
-	//Fraction fraction1(1, 5);
-	//fraction1.PrintFraction();
-	//Fraction fraction2(2, 10);
-	//fraction2.PrintFraction();
-	//std::cout << "-------------------------" << std::endl;
-	//std::cout << "Addition:" << std::endl;
-	//Fraction fraction3 = fraction1 + fraction2;
-	//fraction3.PrintFraction();
-	//std::cout << "-------------------------" << std::endl;
-	//std::cout << "Subtraction:" << std::endl;
-	//fraction3 = fraction1 - fraction2;
-	//fraction3.PrintFraction();
-	//std::cout << "-------------------------" << std::endl;
-	//std::cout << "Multiplication:" << std::endl;
-	//fraction3 = fraction1 * fraction2;
-	//fraction3.PrintFraction();
-	//std::cout << "-------------------------" << std::endl;
-	//std::cout << "Division:" << std::endl;
-	//fraction3 = fraction1 / fraction2;
-	//fraction3.PrintFraction();
-	//std::cout << "-------------------------" << std::endl;
-	//std::cout << "Minus:" << std::endl;
-	//fraction3 = -fraction3;
-	//fraction3.PrintFraction();
-	//std::cout << "-------------------------" << std::endl;
-	//std::cout << "==" << std::endl;
-	//if (fraction1 == fraction2)
-	//	std::cout << "true" << std::endl;
-	//else
-	//	std::cout << "false" << std::endl;
-	//std::cout << "-------------------------" << std::endl;
-	//std::cout << "!=" << std::endl;
-	//if (fraction1 != fraction2)
-	//	std::cout << "true" << std::endl;
-	//else
-	//	std::cout << "false" << std::endl;
-	//std::cout << "-------------------------" << std::endl;
-	//std::cout << ">" << std::endl;
-	//if (fraction1 > fraction2)
-	//	std::cout << "true" << std::endl;
-	//else
-	//	std::cout << "false" << std::endl;
-	//std::cout << "-------------------------" << std::endl;
-	//std::cout << ">=" << std::endl;
-	//if (fraction1 >= fraction2)
-	//	std::cout << "true" << std::endl;
-	//else
-	//	std::cout << "false" << std::endl;
-	//std::cout << "-------------------------" << std::endl;
-	//std::cout << "<" << std::endl;
-	//if (fraction1 < fraction2)
-	//	std::cout << "true" << std::endl;
-	//else
-	//	std::cout << "false" << std::endl;
-	//std::cout << "-------------------------" << std::endl;
-	//std::cout << "<=" << std::endl;
-	//if (fraction1 <= fraction2)
-	//	std::cout << "true" << std::endl;
-	//else
-	//	std::cout << "false" << std::endl;
-	//std::cout << "-------------------------" << std::endl;
+	std::cout << "-------------------------" << std::endl;
+	Fraction fraction1(1, 5);
+	fraction1.PrintFraction();
+	Fraction fraction2(2, 10);
+	fraction2.PrintFraction();
+	std::cout << "-------------------------" << std::endl;
+	std::cout << "Addition:" << std::endl;
+	Fraction fraction3 = fraction1 + fraction2;
+	fraction3.PrintFraction();
+	std::cout << "-------------------------" << std::endl;
+	std::cout << "Subtraction:" << std::endl;
+	fraction3 = fraction1 - fraction2;
+	fraction3.PrintFraction();
+	std::cout << "-------------------------" << std::endl;
+	std::cout << "Multiplication:" << std::endl;
+	fraction3 = fraction1 * fraction2;
+	fraction3.PrintFraction();
+	std::cout << "-------------------------" << std::endl;
+	std::cout << "Division:" << std::endl;
+	fraction3 = fraction1 / fraction2;
+	fraction3.PrintFraction();
+	std::cout << "-------------------------" << std::endl;
+	std::cout << "Minus:" << std::endl;
+	fraction3 = -fraction3;
+	fraction3.PrintFraction();
+	std::cout << "-------------------------" << std::endl;
+	std::cout << "==" << std::endl;
+	if (fraction1 == fraction2)
+		std::cout << "true" << std::endl;
+	else
+		std::cout << "false" << std::endl;
+	std::cout << "-------------------------" << std::endl;
+	std::cout << "!=" << std::endl;
+	if (fraction1 != fraction2)
+		std::cout << "true" << std::endl;
+	else
+		std::cout << "false" << std::endl;
+	std::cout << "-------------------------" << std::endl;
+	std::cout << ">" << std::endl;
+	if (fraction1 > fraction2)
+		std::cout << "true" << std::endl;
+	else
+		std::cout << "false" << std::endl;
+	std::cout << "-------------------------" << std::endl;
+	std::cout << ">=" << std::endl;
+	if (fraction1 >= fraction2)
+		std::cout << "true" << std::endl;
+	else
+		std::cout << "false" << std::endl;
+	std::cout << "-------------------------" << std::endl;
+	std::cout << "<" << std::endl;
+	if (fraction1 < fraction2)
+		std::cout << "true" << std::endl;
+	else
+		std::cout << "false" << std::endl;
+	std::cout << "-------------------------" << std::endl;
+	std::cout << "<=" << std::endl;
+	if (fraction1 <= fraction2)
+		std::cout << "true" << std::endl;
+	else
+		std::cout << "false" << std::endl;
+	std::cout << "-------------------------" << std::endl;
 	//----------------------------------------------------
 
 	return 0;
