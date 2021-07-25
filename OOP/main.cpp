@@ -1,10 +1,15 @@
 #include <iostream>
 #include <string>
 #include <cassert> // дл€ assert()
+#include <vector>
+#include <algorithm>
+#include <set>
 
 using std::string;
 using std::cout;
 using std::endl;
+using std::vector;
+using std::set;
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 //  ƒобавить в контейнерный класс, который был написан в этом уроке, методы:
@@ -19,34 +24,6 @@ private:
 
     int m_length;
     int* m_data;
-
-    void quickSort(int* array, int low, int high)
-    {
-        int i = low;
-        int j = high;
-        int pivot = array[(i + j) / 2];
-        int temp;
-
-        while (i <= j)
-        {
-            while (array[i] < pivot)
-                i++;
-            while (array[j] > pivot)
-                j--;
-            if (i <= j)
-            {
-                temp = array[i];
-                array[i] = array[j];
-                array[j] = temp;
-                i++;
-                j--;
-            }
-        }
-        if (j > low)
-            quickSort(array, low, j);
-        if (i < high)
-            quickSort(array, i, high);
-    }
 
 public:
     ArrayInt() : m_length(0), m_data(nullptr)
@@ -167,7 +144,7 @@ public:
             --m_length;
         }
     }
-    void sort() { quickSort(m_data, 0, m_length - 1); }
+    void sort() { std::sort(m_data, m_data + m_length); }
     void print() {
         if (m_length > 0) {
             cout << "Array : { ";
@@ -191,24 +168,59 @@ public:
     }
 };
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+//  ƒан вектор чисел, требуетс€ вы€снить, сколько среди них различных.
+//  ѕостаратьс€ использовать максимально быстрый алгоритм.
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
 int main()
 {
-    ArrayInt array;
-    for (int i = 0; i < 3; i++)
-    {
-        array.push_back(rand() % 100);
+    //ArrayInt array;
+    //for (int i = 0; i < 3; i++)
+    //    array.push_back(rand() % 100);
+    //array.print();
+    //array.sort();
+    //array.print();
+    //array.pop_front();
+    //array.print();
+    //array.pop_back();
+    //array.print();
+    //array.pop_back();
+    //array.print();
+    //array.pop_front();
+    //array.print();
+
+    vector<int> vec;
+
+    set<int> set;
+
+    for (int x = 1; x <= 20; x++) {
+
+        cout << "---------------------------------------" << endl;
+
+        for (int i = 0; i < x; ++i) {
+            vec.push_back(rand() % 10);
+            set.insert(vec[i]);
+        }
+            
+        sort(vec.begin(), vec.end());
+
+        for (auto number : vec)
+            cout << number << "  ";
+
+        cout << endl;
+
+        cout << set.size() << endl;
+
+        vec.clear();
+        set.clear();
     }
-    array.print();
-    array.sort();
-    array.print();
-    array.pop_front();
-    array.print();
-    array.pop_back();
-    array.print();
-    array.pop_back();
-    array.print();
-    array.pop_front();
-    array.print();
+
+
+
     return 0;
 }
 
