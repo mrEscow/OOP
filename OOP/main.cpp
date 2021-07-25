@@ -292,7 +292,41 @@ public:
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 class Card {
+private:
 
+	enum Suit {
+		Hearts, 
+		spades, 
+		diamonds, 
+		clubs
+	} e_suit;
+
+	enum  CardValue {
+		ace = 1, 
+		deuce, 
+		three, 
+		four, 
+		five, 
+		six, 
+		seven, 
+		eight, 
+		nine, 
+		ten, 
+		jack = 10, 
+		queen = 10,
+		king = 10
+	} e_card_value;
+
+	bool isFaceUp;
+
+public:
+
+	bool Flip() {
+		return !isFaceUp;
+	}
+	int GetValue() {
+		return e_card_value;
+	}
 };
 
 int main() {
