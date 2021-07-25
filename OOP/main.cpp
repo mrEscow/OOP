@@ -3,7 +3,6 @@
 #include <string>
 #include <cassert>
 
-
 //--------------------------------------------------------------------------------------------------------------------------------------
 //  Создать абстрактный класс Figure(фигура).
 //  Его наследниками являются классы Parallelogram(параллелограмм) и Circle(круг).
@@ -11,6 +10,7 @@
 //  Для всех классов создать конструкторы.Для класса Figure добавить чисто виртуальную функцию area() (площадь).
 //  Во всех остальных классах переопределить эту функцию, исходя из геометрических формул нахождения площади.
 //--------------------------------------------------------------------------------------------------------------------------------------
+
 const float PI = 3.141592653589;
 
 class Figure {
@@ -283,6 +283,18 @@ public:
 	}
 };
 
+//--------------------------------------------------------------------------------------------------------------------------------------
+//Создать класс Card, описывающий карту в игре БлэкДжек.
+//У этого класса должно быть три поля : масть, значение карты и положение карты(вверх лицом или рубашкой).
+//Сделать поля масть и значение карты типом перечисления(enum).Положение карты - тип bool.Также в этом классе должно быть два метода :
+//метод Flip(), который переворачивает карту, т.е.если она была рубашкой вверх, то он ее поворачивает лицом вверх, и наоборот.
+//метод GetValue(), который возвращает значение карты, пока можно считать, что туз = 1.
+//--------------------------------------------------------------------------------------------------------------------------------------
+
+class Card {
+
+};
+
 int main() {
 	//----------------------------------------------------
 	//Parallelogram parallelogram(15, 10);
@@ -314,68 +326,68 @@ int main() {
 	//Minivan minivan{ "Fiat","Multipra" };
 	//std::cout << "-------------------------" << std::endl;
 	//----------------------------------------------------
-	std::cout << "-------------------------" << std::endl;
-	Fraction fraction1(1, 5);
-	fraction1.PrintFraction();
-	Fraction fraction2(2, 10);
-	fraction2.PrintFraction();
-	std::cout << "-------------------------" << std::endl;
-	std::cout << "Addition:" << std::endl;
-	Fraction fraction3 = fraction1 + fraction2;
-	fraction3.PrintFraction();
-	std::cout << "-------------------------" << std::endl;
-	std::cout << "Subtraction:" << std::endl;
-	fraction3 = fraction1 - fraction2;
-	fraction3.PrintFraction();
-	std::cout << "-------------------------" << std::endl;
-	std::cout << "Multiplication:" << std::endl;
-	fraction3 = fraction1 * fraction2;
-	fraction3.PrintFraction();
-	std::cout << "-------------------------" << std::endl;
-	std::cout << "Division:" << std::endl;
-	fraction3 = fraction1 / fraction2;
-	fraction3.PrintFraction();
-	std::cout << "-------------------------" << std::endl;
-	std::cout << "Minus:" << std::endl;
-	fraction3 = -fraction3;
-	fraction3.PrintFraction();
-	std::cout << "-------------------------" << std::endl;
-	std::cout << "==" << std::endl;
-	if (fraction1 == fraction2)
-		std::cout << "true" << std::endl;
-	else
-		std::cout << "false" << std::endl;
-	std::cout << "-------------------------" << std::endl;
-	std::cout << "!=" << std::endl;
-	if (fraction1 != fraction2)
-		std::cout << "true" << std::endl;
-	else
-		std::cout << "false" << std::endl;
-	std::cout << "-------------------------" << std::endl;
-	std::cout << ">" << std::endl;
-	if (fraction1 > fraction2)
-		std::cout << "true" << std::endl;
-	else
-		std::cout << "false" << std::endl;
-	std::cout << "-------------------------" << std::endl;
-	std::cout << ">=" << std::endl;
-	if (fraction1 >= fraction2)
-		std::cout << "true" << std::endl;
-	else
-		std::cout << "false" << std::endl;
-	std::cout << "-------------------------" << std::endl;
-	std::cout << "<" << std::endl;
-	if (fraction1 < fraction2)
-		std::cout << "true" << std::endl;
-	else
-		std::cout << "false" << std::endl;
-	std::cout << "-------------------------" << std::endl;
-	std::cout << "<=" << std::endl;
-	if (fraction1 <= fraction2)
-		std::cout << "true" << std::endl;
-	else
-		std::cout << "false" << std::endl;
-	std::cout << "-------------------------" << std::endl;
+	//std::cout << "-------------------------" << std::endl;
+	//Fraction fraction1(1, 5);
+	//fraction1.PrintFraction();
+	//Fraction fraction2(2, 10);
+	//fraction2.PrintFraction();
+	//std::cout << "-------------------------" << std::endl;
+	//std::cout << "Addition:" << std::endl;
+	//Fraction fraction3 = fraction1 + fraction2;
+	//fraction3.PrintFraction();
+	//std::cout << "-------------------------" << std::endl;
+	//std::cout << "Subtraction:" << std::endl;
+	//fraction3 = fraction1 - fraction2;
+	//fraction3.PrintFraction();
+	//std::cout << "-------------------------" << std::endl;
+	//std::cout << "Multiplication:" << std::endl;
+	//fraction3 = fraction1 * fraction2;
+	//fraction3.PrintFraction();
+	//std::cout << "-------------------------" << std::endl;
+	//std::cout << "Division:" << std::endl;
+	//fraction3 = fraction1 / fraction2;
+	//fraction3.PrintFraction();
+	//std::cout << "-------------------------" << std::endl;
+	//std::cout << "Minus:" << std::endl;
+	//fraction3 = -fraction3;
+	//fraction3.PrintFraction();
+	//std::cout << "-------------------------" << std::endl;
+	//std::cout << "==" << std::endl;
+	//if (fraction1 == fraction2)
+	//	std::cout << "true" << std::endl;
+	//else
+	//	std::cout << "false" << std::endl;
+	//std::cout << "-------------------------" << std::endl;
+	//std::cout << "!=" << std::endl;
+	//if (fraction1 != fraction2)
+	//	std::cout << "true" << std::endl;
+	//else
+	//	std::cout << "false" << std::endl;
+	//std::cout << "-------------------------" << std::endl;
+	//std::cout << ">" << std::endl;
+	//if (fraction1 > fraction2)
+	//	std::cout << "true" << std::endl;
+	//else
+	//	std::cout << "false" << std::endl;
+	//std::cout << "-------------------------" << std::endl;
+	//std::cout << ">=" << std::endl;
+	//if (fraction1 >= fraction2)
+	//	std::cout << "true" << std::endl;
+	//else
+	//	std::cout << "false" << std::endl;
+	//std::cout << "-------------------------" << std::endl;
+	//std::cout << "<" << std::endl;
+	//if (fraction1 < fraction2)
+	//	std::cout << "true" << std::endl;
+	//else
+	//	std::cout << "false" << std::endl;
+	//std::cout << "-------------------------" << std::endl;
+	//std::cout << "<=" << std::endl;
+	//if (fraction1 <= fraction2)
+	//	std::cout << "true" << std::endl;
+	//else
+	//	std::cout << "false" << std::endl;
+	//std::cout << "-------------------------" << std::endl;
 	//----------------------------------------------------
 
 	return 0;
