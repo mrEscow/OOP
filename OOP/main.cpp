@@ -207,6 +207,8 @@ int main()
     array.print();
     array.pop_back();
     array.print();
+    array.pop_front();
+    array.print();
     return 0;
 }
 
