@@ -10,6 +10,7 @@
 
 
 int main() {
+	setlocale(LC_ALL, "Russian");
 	//Metoda();
 	Lesson_5();
 	//Blackjack(); 
