@@ -10,7 +10,7 @@
 
 
 int main() {
-	Metoda();
+	//Metoda();
 	Lesson_5();
-	Blackjack(); 
+	//Blackjack(); 
 }
