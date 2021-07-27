@@ -29,36 +29,35 @@
 //--------------------------------------------------------------------------------------------------------------------------------------
 
 class Card {
-private:
-
-	enum Suit { Hearts, spades, diamonds, clubs } m_Suit;
-
-	enum  Rank {
+public:
+	enum Suit { Hearts, spades, diamonds, clubs } ;
+	enum Rank {
 		ace = 1,
-		deuce,
-		three,
-		four,
-		five,
-		six,
-		seven,
-		eight,
-		nine,
-		ten,
+		deuce, three, four, five, six, seven, eight, nine, ten,
 		jack = 10,
 		queen = 10,
 		king = 10
-	} m_Rank;
+	} ;
 
+	
+private:
+	Suit m_Suit;
+	Rank m_Rank;
 	bool m_isFaceUp;
 
 public:
-
-	bool Flip() {
-		return !m_isFaceUp;
+	Card(Rank rank, Suit suit, bool ifu) : m_Rank(rank), m_Suit(suit), m_isFaceUp(ifu) {}
+	void Flip() {
+		m_isFaceUp = !m_isFaceUp;
 	}
 
 	int GetValue() {
-		return m_Rank;
+		//если карта перевернута лицом вниз, ее значение равно О
+		int value = 0;
+		if (m_isFaceUp) {
+			value = m_Rank;
+		}
+		return value;
 	}
 };
 
@@ -72,33 +71,61 @@ public:
 //	метод GetValue, который возвращает сумму очков карт руки(здесь предусмотреть возможность того, что туз может быть равен 11).
 //---------------------------------------------------------------------------------------------------------------------------------------------
 
-class Hard {
-private:
-
+class Hand {
+protected:
 	vector<Card*> m_Cards;
 
 public:
+	Hand() { m_Cards.reserve(7); }
+	
+	virtual ~Hand(); // виртуальный деструктор
 
 	void Add(Card* pCard) {
 		m_Cards.push_back(pCard);
 	}
 
 	void Clear() {
+		// проходит по вектору, освобождая всю память в куче
+		vector<Card*>::iterator iter = m_Cards.begin();
+		for (iter = m_Cards.begin(); iter != m_Cards.end(); ++iter)
+		{
+			delete* iter;
+			*iter = 0;
+		}
+		// очищает вектор указателей
 		m_Cards.clear();
+
 	}
 
-	int GetTotal() {
+	int GetTotal() const {
+		// если карт в руке нет, возвращает значение 0
+		if (m_Cards.empty()) return 0;
+		//если первая карта имеет значение 0, то она лежит рубашкой вверх:
+		// вернуть значение 0
+		if (m_Cards[0]->GetValue() == 0) return 0;
 		int sum{ 0 };
-		for (auto card : m_Cards) {
-			if (sum <= 10 && card->GetValue() == 1)
-				sum += 11;
-			else
-				sum += card->GetValue();
+		// находит сумму очков всех карт, каждый туз дает 1 очко
+		for (auto card : m_Cards) 
+			sum += card->GetValue();
+		// определяет, держит ли рука туз
+		bool containsAce = false;
+		for (auto card : m_Cards)
+			if (card->GetValue() == Card::ace)
+				containsAce = true;
+		// если рука держит туз и сумма довольно маленькая, туз дает 11 очков
+		if (containsAce && sum <= 11)
+		{
+			// добавляем только 10 очков, поскольку мы уже добавили
+			// за каждый туз по одному очку
+			sum += 10;
 		}
+
 			
 		return sum;
 	}
 };
+
+Hand::~Hand() { Clear(); }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
 //	Согласно иерархии классов, которая представлена в методичке к уроку 3, от класса Hand наследует класс GenericPlayer, 
@@ -109,8 +136,23 @@ public:
 //	Bust() - выводит на экран имя игрока и объявляет, что у него перебор.
 //---------------------------------------------------------------------------------------------------------------------------------------------
 
-class GenericPlayer {
+class GenericPlayer : protected Hand{
+private:
+	string m_name;
+public:
+	GenericPlayer(string name) : m_name(name) {}
 
+	virtual bool IsHitting() = 0;
+
+	bool IsBoosted() {
+		if (GetTotal() > 21)
+			return true;
+		else
+			return false;
+	}
+	void Bust() {
+		cout << m_name << " has too many points!" << endl;
+	}
 };
 
 class Player {
