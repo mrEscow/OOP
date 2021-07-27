@@ -482,12 +482,30 @@ class MyDay {
 private:
     T m_day;
 public:
-    MyDay(T day) : m_day(day) {};
+
+    MyDay(T day);
+
     ~MyDay();
+
+    void print();
 };
 
+
+template<class T>
+inline MyDay<T>::MyDay(T day)
+{
+    m_day = day;
+}
+
+template<class T>
+inline void MyDay<T>::print()
+{
+    cout << m_day << endl;
+}
+
 template <>
-MyDay<char*>::MyDay(char* day) {
+MyDay<char*>::MyDay(char* day) 
+{
     // Определяем длину day
     int length = 0;
     while (day[length] != '\0')
@@ -504,12 +522,15 @@ MyDay<char*>::MyDay(char* day) {
 }
 
 template <>
-MyDay<char*>::~MyDay() {
+MyDay<char*>::~MyDay()
+{
     delete[] m_day;
 }
 
 
-int Metoda()
+
+//-----------------------------------------------------------------------------------------------
+void Metoda()
 {
     cout << "------------------" << endl;
 
@@ -603,13 +624,13 @@ int Metoda()
     char* First_day = new char[40]{ "First" };
 
     //// Сохраняем число
-    MyDay<char*> myDay(First_day);
+    MyDay<char*> myNewDay(First_day);
 
     //// Удаляем временную строку
     delete[] First_day;
     //
     //// Выводим имя
-    myDay.print();
+    myNewDay.print();
 
     //// Удаляем временную строку
     //delete[] name;
@@ -623,5 +644,6 @@ int Metoda()
     cout << "------------------" << endl;
     cout << "------------------" << endl;
 
-    return 0;
-    
+
+
+}
