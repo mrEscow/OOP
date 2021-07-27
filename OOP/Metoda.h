@@ -105,7 +105,7 @@ Day_int Day_int::operator--(int)
 
 
 template <typename T>
-T max(T a, T b)
+T T_max(T a, T b)
 {
     return (a > b) ? a : b;
 }
@@ -574,7 +574,7 @@ void Metoda()
 
     cout << "--------Array<int> intArray(10);----------" << endl;
 
-    Array<int> intArray(10);
+    Array<int> intArray(5);
 
     intArray.clear();
 
@@ -584,7 +584,7 @@ void Metoda()
 
     cout << "--------Array<Day> dayArray(31);----------" << endl;
 
-    Array<Day_int> dayArray(31);
+    Array<Day_int> dayArray(5);
 
     dayArray.clear();
 
