@@ -151,7 +151,7 @@ public:
 // Create in function Lesson_4
 
 void Lesson_4() {
-    std::cout << "Lesson_1" << std::endl;
+    std::cout << "Lesson_4" << std::endl;
     //-----------------------------------------
     ArrayInt array;
     for (int i = 0; i < 3; i++)
