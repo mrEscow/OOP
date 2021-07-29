@@ -73,6 +73,6 @@ void Lesson_6() {
     cin >> readint;
     cout << readint << endl;
     cout << "----------------" << endl;   
-    cout << endll;
+    cout << "doble endl" << endll;
     cout << "----------------" << endl;
 }
