@@ -142,7 +142,6 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Blackjack.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="Lesson_1.h" />
     <ClInclude Include="Lesson_2.h" />
@@ -153,6 +152,7 @@
     <ClInclude Include="Lesson_7.h" />
     <ClInclude Include="Lesson_8.h" />
     <ClInclude Include="Metoda.h" />
+    <ClInclude Include="Blackjack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
