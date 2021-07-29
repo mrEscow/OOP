@@ -17,8 +17,7 @@ private:
 public:
  
 
-     friend istream& operator>> (istream& in, ReadInt& date)
-     {
+     friend istream& operator>> (istream& in, ReadInt& date){
          while (true)
          {
              cout << "Enter a int value: ";
@@ -42,8 +41,7 @@ public:
          }
      }
 
-     friend ostream& operator<< (ostream& out, const ReadInt& date)
-     {
+     friend ostream& operator<< (ostream& out, const ReadInt& date){
          if (!date.m_is_empty) {
              out << date.m_date;
              return out;
@@ -61,19 +59,20 @@ public:
 //	Создать собственный манипулятор endll для стандартного потока вывода, который выводит два перевода строки и сбрасывает буфер.
 //-------------------------------------------------------------------------------------------------------------------------------
 
+ostream& endll (ostream& out){  
+    out << endl << endl;
+    return out;
+}
 
 
 
 void Lesson_6() {
 	cout << "Lesson_6" << endl;
 	cout << "----------------" << endl;
-
     ReadInt readint;
-
     cin >> readint;
-
     cout << readint << endl;
-
-
+    cout << "----------------" << endl;   
+    cout << endll;
     cout << "----------------" << endl;
 }
