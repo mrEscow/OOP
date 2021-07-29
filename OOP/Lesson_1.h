@@ -129,7 +129,9 @@ void Stack::print() {
 //-------------
 
 void Lesson_1() {
+	std::cout << "Lesson_1" << std::endl;
 	Stack stack;
+
 	stack.reset();
 	stack.print();
 	stack.push(3);
