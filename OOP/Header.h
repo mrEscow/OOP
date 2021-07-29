@@ -11,9 +11,11 @@
 #include <ctime>
 #include <cmath>
 #include <cstdint>
-#include <cassert> // ��� assert()
+#include <cassert>		// для assert()
 #include <algorithm>
 #include <set>
+#include <iomanip>		// подключение манипуляторов ввода.вывода
+#include <sstream>		// для stringstream
 
 using namespace std; 
 

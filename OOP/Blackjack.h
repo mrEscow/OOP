@@ -223,7 +223,7 @@ void Blackjack() {
 	}
 	cout << endl;
 
-	// ������� ����
+
 
 	Game aGame(names);
 	char again = 'y';
