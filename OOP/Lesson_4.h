@@ -152,7 +152,7 @@ public:
 
 void Lesson_4() {
     std::cout << "Lesson_4" << std::endl;
-    //-----------------------------------------
+    std::cout << "-------------------------" << std::endl;
     ArrayInt array;
     for (int i = 0; i < 3; i++)
         array.push_back(rand() % 100);
@@ -167,7 +167,7 @@ void Lesson_4() {
     array.print();
     array.pop_front();
     array.print();
-    //-----------------------------------------
+    std::cout << "-------------------------" << std::endl;
     vector<int> vec;
     set<int> set;
     for (int x = 1; x <= 20; x++) {
@@ -175,9 +175,9 @@ void Lesson_4() {
             vec.push_back(rand() % 10);
             set.insert(vec[i]);
         }          
-        cout << set.size() << endl;
+        cout << "In vector "<< x << "\t" << set.size() << " different numbers"<< endl;
         vec.clear();
         set.clear();
     }
-    //-----------------------------------------
+    std::cout << "-------------------------" << std::endl;
 }
