@@ -1,21 +1,23 @@
-//----------------------//
 #include "Header.h"  
-//----------------------//
-#include "Metoda.h"  
-//----------------------//
-#include "Lesson_5.h"  
-//----------------------//
-#include "Blackjack.h"  
-//----------------------//
-
 
 int main() {
 
 	setlocale(LC_ALL, "Russian");
-	SetConsoleCP(866); 
+	SetConsoleCP(866);
 	SetConsoleOutputCP(866);
 
-	//Metoda();
+	Metoda();
+
+	Lesson_1();
+	Lesson_2();
+	Lesson_3();
+	Lesson_4();
 	Lesson_5();
-	//Blackjack(); 
+	Lesson_6();
+	Lesson_7();
+	Lesson_8();
+
+	Blackjack(); 
+  
+  return 0;
 }

@@ -91,5 +91,3 @@ void Lesson_5() {
     }
     cout << "----------------" << endl;
 }
-
-// Test: changes it to UTF-8.
