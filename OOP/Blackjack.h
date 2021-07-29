@@ -67,6 +67,14 @@ public:
 		}
 		return value;
 	}
+	//	Если карта перевернута рубашкой вверх(мы ее не видим), вывести ХХ, если мы ее видим, вывести масть и номинал карты.
+	friend ostream& operator<< (ostream& out, Card& card) {
+		if (card.m_isFaceUp)
+			out << "Card: " << card.m_Suit << "\t" << card.m_Rank;
+		else
+			out << "XX";
+		return out;
+	}
 };
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -121,6 +129,8 @@ public:
 			
 		return sum;
 	}
+
+
 };
 
 
@@ -136,7 +146,7 @@ Hand::~Hand() { Clear(); }
 //------------------------------------------------------------------------------------------------------------------------
 
 class GenericPlayer : protected Hand{
-private:
+protected:
 	string m_name;
 public:
 	GenericPlayer(string name) : m_name(name) {}
@@ -152,7 +162,15 @@ public:
 	void Bust() {
 		cout << m_name << " has too many points!" << endl;
 	}
-
+	// вывод должен отображать имя игрока и его карты, а также общую сумму очков его карт.
+	friend ostream& operator<< (ostream& out, GenericPlayer& gp) {
+		
+		out << "Player: " << gp.m_name << "\n" << "Cards:\n"; 
+		for (auto c : gp.m_Cards)
+			out << c << "\n";
+		out << "Total: " << gp.GetTotal();
+		return out;
+	}
 };
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -164,8 +182,33 @@ public:
 //	void Push() const - выводит на экран имя игрока и сообщение, что он сыграл вничью.
 //------------------------------------------------------------------------------------------------------------------------
 
-class Player {
+class Player : protected GenericPlayer{
+private:
 
+public:
+	Player(string name) :GenericPlayer(name){}
+	virtual bool IsHitting() const {
+		if (GetTotal() < 21) {
+			char answer;
+			cout << "Do you need another card ?  Y/N :  ";
+			cin >> answer;
+			if (answer == 'y' || 'Y')
+				return true;
+			else
+				return false;
+		}
+		else
+			return false;
+	}
+	void Win() const {
+		cout << "Player " << m_name << " is win!" << endl;
+	}
+	void Lose() const {
+		cout << "Player " << m_name << " is lose!" << endl;
+	}
+	void Push() const {
+		cout << "Player " << m_name << " played a draw!" << endl;
+	}
 };
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -176,8 +219,19 @@ class Player {
 //	void FlipFirstCard() - метод переворачивает первую карту дилера.
 //------------------------------------------------------------------------------------------------------------------------
 
-class House {
-
+class House : protected GenericPlayer {
+public:
+	House():GenericPlayer("Diler"){}
+	virtual bool IsHitting() const {
+		if (GetTotal() < 16)
+			return true;
+		else
+			return false;
+	}
+	void FlipFirstCard() {
+		if(m_Cards[0]->GetValue() == 0)
+			m_Cards[0]->Flip();
+	}
 };
 
 class Deck {
