@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #pragma execution_character_set("utf-8")
 
@@ -11,6 +11,9 @@
 #include <ctime>
 #include <cmath>
 #include <cstdint>
+#include <cassert> // ��� assert()
+#include <algorithm>
+#include <set>
 
 using namespace std; 
 
