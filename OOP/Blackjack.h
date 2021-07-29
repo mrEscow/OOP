@@ -54,7 +54,7 @@ private:
 	bool m_isFaceUp;
 
 public:
-	Card(Suit suit, CardValue card_value, bool iFUp):e_suit(suit),e_card_value(card_value),isFaceUp(iFUp){}
+	Card(Suit suit, Rank rank, bool iFU):m_Suit(suit), m_Rank(rank), m_isFaceUp(iFU){}
 	bool Flip() {
 		return !m_isFaceUp;
 	}
