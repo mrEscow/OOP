@@ -1,6 +1,5 @@
 #include "Header.h"  
 
-
 int main() {
 
 	setlocale(LC_ALL, "Russian");
@@ -22,7 +21,3 @@ int main() {
   
   return 0;
 }
-
-
-
-
