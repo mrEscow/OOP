@@ -16,6 +16,7 @@
 #include <set>
 #include <iomanip>		// подключение манипуляторов ввода.вывода
 #include <sstream>		// для stringstream
+#include <cctype>
 
 using namespace std; 
 
