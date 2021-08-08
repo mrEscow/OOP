@@ -31,11 +31,19 @@ public:
                  in.clear(); // то возвращаем cin в 'обычный' режим работы
                  in.ignore(32767, '\n'); // и удаляем значения предыдущего ввода из входного буфера
                  cout << "Oops, that input is invalid.  Please try again." << endl;
+                 continue; // просим пользователя ввести свой возраст еще раз
              }
              else
              {
                  in.ignore(32767, '\n'); // удаляем лишние значения 
-                 date.m_is_empty = !true;
+                 if (std::cin.gcount() > 1) // если мы очистили более одного символа
+                 {
+                     cout << "Oops, that input is invalid.  Please try again." << endl;
+                     continue; // то этот ввод считается некорректным, и мы просим пользователя ввести свой возраст еще раз
+                 }
+                     
+
+                 date.m_is_empty = !true; // если всё хорошо то разрешаем извлечение
                  
                  return in;
              }
