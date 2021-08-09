@@ -38,7 +38,7 @@
 
 class Card {
 public:
-	enum Suit { Hearts, spades, diamonds, clubs } ;
+	enum Suit { hearts, spades, diamonds, clubs } ;
 	enum Rank {
 		ace = 1,
 		deuce, three, four, five, six, seven, eight, nine, ten,
@@ -69,8 +69,26 @@ public:
 	}
 	//	Если карта перевернута рубашкой вверх(мы ее не видим), вывести ХХ, если мы ее видим, вывести масть и номинал карты.
 	friend ostream& operator<< (ostream& out, Card& card) {
-		if (card.m_isFaceUp)
-			out << "Card: " << card.m_Suit << "\t" << card.m_Rank;
+		if (card.m_isFaceUp) {
+			string suit;
+			switch (card.m_Suit)	
+			{
+			case hearts:
+				suit = "hearts";
+			case spades:
+				suit = "spades";
+			case diamonds:
+				suit = "diamonds";
+			case clubs:
+				suit = "clubs";
+			default:
+				break;
+			}
+			
+
+			out << "Card: " << suit << "\t" << card.m_Rank;
+		}
+			
 		else
 			out << "XX";
 		return out;
@@ -163,10 +181,12 @@ public:
 	// данная функция не виртуальная, т.к. имеет одинаковую реализацию
 	// для игрока и дилера
 	bool IsBoosted() const {
-		if (GetTotal() > 21)
-			return true;
-		else
-			return false;
+		return (GetTotal() > 21);
+
+		//if (GetTotal() > 21)
+		//	return true;
+		//else
+		//	return false;
 	}
 
 	// объявляет, что игрок имеет перебор
@@ -203,7 +223,7 @@ public:
 	//virtual ~Player();
 
 	bool IsHitting() const {
-		//if (GetTotal() < 21) {
+		if (GetTotal() < 21) {
 			char answer;
 			cout << m_name <<  "Do you need another card ?  Y/N :  ";
 			cin >> answer;
@@ -211,9 +231,9 @@ public:
 				return true;
 			else
 				return false;
-		//}
-		//else
-			//return false;
+		}
+		else
+			return false;
 	}
 	void Win() const {
 		cout << "Player " << m_name << " is win!" << endl;
@@ -239,10 +259,11 @@ public:
 	House():GenericPlayer("Diler"){}
 	//virtual ~House();
 	virtual bool IsHitting() const {
-		if (GetTotal() < 16)
-			return true;
-		else
-			return false;
+		return GetTotal() < 16;
+		//if (GetTotal() < 16)
+		//	return true;
+		//else
+		//	return false;
 	}
 	void FlipFirstCard() {
 		if(m_Cards[0]->GetValue() == 0)
@@ -270,7 +291,7 @@ public:
 	void Populate() { // - Создает стандартную колоду из 52 карт, вызывается из конструктора.
 		Clear();
 		// создает стандартную колоду
-		for (int s = Card::Hearts; s <= Card::clubs; ++s)
+		for (int s = Card::hearts; s <= Card::clubs; ++s)
 		{
 			for (int r = Card::ace; r <= Card::king + 3; ++r)
 			{
@@ -286,8 +307,10 @@ public:
 	void Deal(Hand& aHand) { // - метод, который раздает в руку одну карту
 		if (!m_Cards.empty())
 		{
-			aHand.Add(m_Cards.back());
-			m_Cards.pop_back();
+			if(aHand.m_Cards.size() > 2)
+				m_Cards.back()->Flip();
+			aHand.Add(m_Cards.back());				
+			m_Cards.pop_back();	
 		}
 		else
 		{
@@ -299,9 +322,10 @@ public:
 		cout << endl;
 		// продолжает раздавать карты до тех пор, пока у игрока не случается
 		// перебор или пока он хочет взять еще одну карту
-		while (!(aGenerlcPlayer.IsBoosted()) && aGenerlcPlayer.IsHitting())
+		while (!aGenerlcPlayer.IsBoosted() && aGenerlcPlayer.IsHitting())
 		{
 			Deal(aGenerlcPlayer);
+			
 			cout << aGenerlcPlayer << endl;
 
 			if (aGenerlcPlayer.IsBoosted())
@@ -373,11 +397,12 @@ public:
 		{
 			for (auto card : pPlayer->m_Cards)
 				card->Flip();
+			cout << *pPlayer << endl;
 		}
 		cout << m_House << endl;
 
-		cout << "system pause 1" << endl;
-		system("pause");
+		//cout << "system pause 1" << endl;
+		//system("pause");
 
 		// раздает игрокам дополнительные карты
 		for (pPlayer = m_Players.begin(); pPlayer != m_Players.end(); ++pPlayer)
@@ -389,14 +414,14 @@ public:
 		m_House.FlipFirstCard();
 		cout << endl << m_House;
 
-		cout << "system pause 2" << endl;
-		system("pause");
+		//cout << "system pause 2" << endl;
+		//system("pause");
 
 		// раздает дилеру дополнительные карты
 		m_Deck.AddltionalCards(m_House);
 
-		cout << "system pause 3" << endl;
-		system("pause"); 
+		//cout << "system pause 3" << endl;
+		//system("pause"); 
 
 		if (m_House.IsBoosted())
 		{
@@ -433,7 +458,8 @@ public:
 			}
 
 		}
-
+		//cout << "system pause 4" << endl;
+		//system("pause");
 		// очищает руки всех игроков
 		for (pPlayer = m_Players.begin(); pPlayer != m_Players.end(); ++pPlayer)
 		{
