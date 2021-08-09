@@ -89,7 +89,7 @@ public:
 //---------------------------------------------------------------------------------------------------------------------------------------------
 
 class Hand {
-protected:
+public:
 	vector<Card*> m_Cards;
 
 public:
@@ -151,7 +151,7 @@ protected:
 
 public:
 	GenericPlayer(string name) : m_name(name) {}
-	virtual ~GenericPlayer();
+	//virtual ~GenericPlayer();
 
 	// показывает, хочет ли игрок продолжать брать карты
 	// Для класса GenericPlayer функция не имеет своей реализации,
@@ -178,9 +178,9 @@ public:
 	// вывод должен отображать имя игрока и его карты, а также общую сумму очков его карт.
 	friend ostream& operator<< (ostream& out, GenericPlayer& gp) {
 		
-		out << "Player: " << gp.m_name << "\n" << "Cards:\n"; 
+		out << "\nPlayer: " << gp.m_name << "\n" << "Cards:\n"; 
 		for (auto c : gp.m_Cards)
-			out << c << "\n";
+			out << *c << "\n";
 		out << "Total: " << gp.GetTotal();
 		return out;
 	}
@@ -200,20 +200,20 @@ private:
 
 public:
 	Player(string name) :GenericPlayer(name){}
-	virtual ~Player();
+	//virtual ~Player();
 
 	bool IsHitting() const {
-		if (GetTotal() < 21) {
+		//if (GetTotal() < 21) {
 			char answer;
-			cout << "Do you need another card ?  Y/N :  ";
+			cout << m_name <<  "Do you need another card ?  Y/N :  ";
 			cin >> answer;
-			if (answer == 'y' || 'Y')
+			if (answer == 'y' || answer == 'Y')
 				return true;
 			else
 				return false;
-		}
-		else
-			return false;
+		//}
+		//else
+			//return false;
 	}
 	void Win() const {
 		cout << "Player " << m_name << " is win!" << endl;
@@ -237,8 +237,8 @@ public:
 class House : public GenericPlayer {
 public:
 	House():GenericPlayer("Diler"){}
-
-	bool IsHitting() const {
+	//virtual ~House();
+	virtual bool IsHitting() const {
 		if (GetTotal() < 16)
 			return true;
 		else
@@ -266,7 +266,7 @@ public:
 		m_Cards.reserve(52);
 		Populate();
 	 }
-    virtual ~Deck();
+    //virtual ~Deck();
 	void Populate() { // - Создает стандартную колоду из 52 карт, вызывается из конструктора.
 		Clear();
 		// создает стандартную колоду
@@ -350,7 +350,7 @@ public:
 		m_Deck.Shuffle();
 	}
 
-	~Game();
+	//~Game();
 
 	void Play() {
 		// раздает каждому по две стартовые карты
@@ -371,7 +371,8 @@ public:
 		// открывает руки всех игроков
 		for (pPlayer = m_Players.begin(); pPlayer != m_Players.end(); ++pPlayer)
 		{
-			cout << *pPlayer << endl;
+			for (auto card : pPlayer->m_Cards)
+				card->Flip();
 		}
 		cout << m_House << endl;
 
@@ -457,7 +458,6 @@ void Blackjack() {
 	{
 		cout << "How many players? (1 - 7): ";
 		cin >> numPlayers;
-		numPlayers = 1;
 	}
 
 	vector<string> names;
@@ -479,7 +479,6 @@ void Blackjack() {
 		aGame.Play();
 		cout << "\nDo you want to play again? (Y/N): ";
 		cin >> again;
-		again = 'n';
 	}
 
 
