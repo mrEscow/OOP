@@ -376,6 +376,9 @@ public:
 		}
 		cout << m_House << endl;
 
+		cout << "system pause 1" << endl;
+		system("pause");
+
 		// раздает игрокам дополнительные карты
 		for (pPlayer = m_Players.begin(); pPlayer != m_Players.end(); ++pPlayer)
 		{
@@ -386,8 +389,14 @@ public:
 		m_House.FlipFirstCard();
 		cout << endl << m_House;
 
+		cout << "system pause 2" << endl;
+		system("pause");
+
 		// раздает дилеру дополнительные карты
 		m_Deck.AddltionalCards(m_House);
+
+		cout << "system pause 3" << endl;
+		system("pause"); 
 
 		if (m_House.IsBoosted())
 		{
