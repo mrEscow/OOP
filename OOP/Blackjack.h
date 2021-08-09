@@ -34,6 +34,8 @@
 //	метод GetValue(), который возвращает значение карты, пока можно считать, что туз = 1.
 //--------------------------------------------------------------------------------------------------------------------------------------
 
+
+
 class Card {
 public:
 	enum Suit { Hearts, spades, diamonds, clubs } ;
@@ -64,6 +66,14 @@ public:
 			value = m_Rank;
 		}
 		return value;
+	}
+	//	Если карта перевернута рубашкой вверх(мы ее не видим), вывести ХХ, если мы ее видим, вывести масть и номинал карты.
+	friend ostream& operator<< (ostream& out, Card& card) {
+		if (card.m_isFaceUp)
+			out << "Card: " << card.m_Suit << "\t" << card.m_Rank;
+		else
+			out << "XX";
+		return out;
 	}
 };
 
@@ -119,6 +129,8 @@ public:
 			
 		return sum;
 	}
+
+
 };
 
 
@@ -134,7 +146,7 @@ Hand::~Hand() { Clear(); }
 //------------------------------------------------------------------------------------------------------------------------
 
 class GenericPlayer : protected Hand{
-private:
+protected:
 	string m_name;
 public:
 	GenericPlayer(string name) : m_name(name) {}
@@ -150,15 +162,76 @@ public:
 	void Bust() {
 		cout << m_name << " has too many points!" << endl;
 	}
-
+	// вывод должен отображать имя игрока и его карты, а также общую сумму очков его карт.
+	friend ostream& operator<< (ostream& out, GenericPlayer& gp) {
+		
+		out << "Player: " << gp.m_name << "\n" << "Cards:\n"; 
+		for (auto c : gp.m_Cards)
+			out << c << "\n";
+		out << "Total: " << gp.GetTotal();
+		return out;
+	}
 };
 
-class Player {
+//------------------------------------------------------------------------------------------------------------------------
+//	Реализовать класс Player, который наследует от класса GenericPlayer.У этого класса будет 4 метода:
+//	virtual bool IsHitting() const - реализация чисто виртуальной функции базового класса.
+//	Метод спрашивает у пользователя, нужна ли ему еще одна карта и возвращает ответ пользователя в виде true или false.
+//	void Win() const - выводит на экран имя игрока и сообщение, что он выиграл.
+//	void Lose() const - выводит на экран имя игрока и сообщение, что он проиграл.
+//	void Push() const - выводит на экран имя игрока и сообщение, что он сыграл вничью.
+//------------------------------------------------------------------------------------------------------------------------
 
+class Player : protected GenericPlayer{
+private:
+
+public:
+	Player(string name) :GenericPlayer(name){}
+	virtual bool IsHitting() const {
+		if (GetTotal() < 21) {
+			char answer;
+			cout << "Do you need another card ?  Y/N :  ";
+			cin >> answer;
+			if (answer == 'y' || 'Y')
+				return true;
+			else
+				return false;
+		}
+		else
+			return false;
+	}
+	void Win() const {
+		cout << "Player " << m_name << " is win!" << endl;
+	}
+	void Lose() const {
+		cout << "Player " << m_name << " is lose!" << endl;
+	}
+	void Push() const {
+		cout << "Player " << m_name << " played a draw!" << endl;
+	}
 };
 
-class House {
+//------------------------------------------------------------------------------------------------------------------------
+//	Реализовать класс House, который представляет дилера.Этот класс наследует от класса GenericPlayer.
+//	У него есть 2 метода:
+//	virtual bool IsHitting() const - метод указывает, нужна ли дилеру еще одна карта.
+//	Если у дилера не больше 16 очков, то он берет еще одну карту.
+//	void FlipFirstCard() - метод переворачивает первую карту дилера.
+//------------------------------------------------------------------------------------------------------------------------
 
+class House : protected GenericPlayer {
+public:
+	House():GenericPlayer("Diler"){}
+	virtual bool IsHitting() const {
+		if (GetTotal() < 16)
+			return true;
+		else
+			return false;
+	}
+	void FlipFirstCard() {
+		if(m_Cards[0]->GetValue() == 0)
+			m_Cards[0]->Flip();
+	}
 };
 
 class Deck {
@@ -175,6 +248,13 @@ public:
 
 	}
 };
+
+//--------------------------------------------------------------------------------------------------------------------------------------
+//	Написать перегрузку оператора вывода для класса Card.
+//	Если карта перевернута рубашкой вверх(мы ее не видим), вывести ХХ, если мы ее видим, вывести масть и номинал карты.
+//	Также для класса GenericPlayer написать перегрузку оператора вывода, 
+//	который должен отображать имя игрока и его карты, а также общую сумму очков его карт.
+//--------------------------------------------------------------------------------------------------------------------------------------
 
 void Blackjack() {
 	cout << "\t\tWelcome to Blackjack!\n\n";
@@ -197,7 +277,7 @@ void Blackjack() {
 	}
 	cout << endl;
 
-	// ������� ����
+
 
 	Game aGame(names);
 	char again = 'y';
