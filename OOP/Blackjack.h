@@ -225,7 +225,7 @@ public:
 	bool IsHitting() const {
 		if (GetTotal() < 21) {
 			char answer;
-			cout << m_name <<  "Do you need another card ?  Y/N :  ";
+			cout << m_name <<  ", do you need another card ?  Y/N :  ";
 			cin >> answer;
 			if (answer == 'y' || answer == 'Y')
 				return true;
@@ -269,6 +269,9 @@ public:
 		if(m_Cards[0]->GetValue() == 0)
 			m_Cards[0]->Flip();
 	}
+	void FlipSecondCard() {
+		m_Cards[1]->Flip();
+	}
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------------
@@ -307,7 +310,7 @@ public:
 	void Deal(Hand& aHand) { // - метод, который раздает в руку одну карту
 		if (!m_Cards.empty())
 		{
-			if(aHand.m_Cards.size() > 2)
+			if(aHand.m_Cards.size() > 1)
 				m_Cards.back()->Flip();
 			aHand.Add(m_Cards.back());				
 			m_Cards.pop_back();	
@@ -411,7 +414,7 @@ public:
 		}
 
 		// показывает первую карту дилера
-		m_House.FlipFirstCard();
+		m_House.FlipSecondCard();
 		cout << endl << m_House;
 
 		//cout << "system pause 2" << endl;
