@@ -191,18 +191,18 @@ void Lesson_8() {
 	}
 	cout << "----------------" << endl;
 	{
-		//Bar bar;
-		//float a{-1};
-		//try {
-		//	while (a != 0) {
-		//		cout << "Input float please: ";
-		//		cin >> a;
-		//		bar.set(a);				
-		//	}
-		//}
-		//catch(Ex& a){
-		//	cout << "EX: " << a.getError() <<  endl;
-		//}
+		Bar bar;
+		float a{-1};
+		try {
+			while (a != 0) {
+				cout << "Input float please: ";
+				cin >> a;
+				bar.set(a);				
+			}
+		}
+		catch(Ex& a){
+			cout << "EX: " << a.getError() <<  endl;
+		}
 	}
 	cout << "----Robot----" << endl;
 	{
