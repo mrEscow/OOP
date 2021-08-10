@@ -208,11 +208,10 @@ void Lesson_8() {
 	{
 		Robot robot;
 		char again = 'y';
+		cout << "\nDo you want to play with the robot? (Y/N): ";
+		cin >> again;
 		while (again != 'n' && again != 'N')
 		{
-			cout << "\nDo you want to play with the robot? (Y/N): ";
-			cin >> again;
-
 			int dir{ -1 };
 			int size{ 0 };
 			cout << "Input dir:\n 0 = RIGHT\n 1 = LEFT\n 2 = UP\n 3 = DOWN\n:  ";
@@ -233,6 +232,9 @@ void Lesson_8() {
 			catch (Robot::ExRobot &error) {
 				error.PrintError(robot);
 			}
+
+			cout << "\nDo you want to play with the robot? (Y/N): ";
+			cin >> again;
 		}
 	}
 	cout << "----------------" << endl;
