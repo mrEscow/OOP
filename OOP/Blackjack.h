@@ -496,6 +496,7 @@ void Blackjack() {
 	{
 		cout << "How many players? (1 - 7): ";
 		cin >> numPlayers;
+
 	}
 
 	vector<string> names;
@@ -512,7 +513,7 @@ void Blackjack() {
 
 	Game aGame(names);
 	char again = 'y';
-	while (again != 'n' && again != 'N')
+	while (again != 'n' || again != 'N')
 	{
 		aGame.Play();
 		cout << "\nDo you want to play again? (Y/N): ";
