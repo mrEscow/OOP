@@ -17,6 +17,8 @@
 #include <iomanip>		// подключение манипуляторов ввода.вывода
 #include <sstream>		// для stringstream
 #include <cctype>
+#include <memory>		// для std::unique_ptr
+#include <utility>
 
 using namespace std; 
 
