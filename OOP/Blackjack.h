@@ -496,6 +496,7 @@ void Blackjack() {
 	{
 		cout << "How many players? (1 - 7): ";
 		cin >> numPlayers;
+
 	}
 
 	vector<string> names;
